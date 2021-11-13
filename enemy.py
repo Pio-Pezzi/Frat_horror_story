@@ -31,6 +31,7 @@ class poi:
     """Person of Interest."""
     position: Vector
     color: tuple 
+    show: bool = True
 
     def __init__(self, color: tuple):
         self.position = self.randpos()
