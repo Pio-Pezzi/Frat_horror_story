@@ -104,7 +104,8 @@ while playing:
         drink_list.append(poi(brown))
         d += 1 
     for drink in drink_list: 
-        py.draw.circle(screen, drink.color, (drink.position.x, drink.position.y), 10)
+        if drink.show:
+            py.draw.circle(screen, drink.color, (drink.position.x, drink.position.y), 10)
 
     # Adding 
     for key in enemy_list:
