@@ -27,18 +27,3 @@ class Player:
                 self.position.x += 1
             elif event.type ==  py.K_RIGHT:
                 self.position.x -= 1
-
-
-    def collision(self, vector) -> None:
-        for key in enemy_list:
-            if (self.position.x + 2 * self.size < enemy_list[key].position.x < self.position.x - 2 * self.size) and (self.position.y + 2 * self.size < enemy_list[key].position.y < self.position.y - 2 * self.size):
-                social_points -= 5
-
-        for key in poi_list:
-            if (self.position.x + 2 * self.size < poi_list[key].position.x < self.position.x - 2 * self.size) and (self.position.y + 2 * self.size < poi_list[key].position.y < self.position.y - 2 * self.size):
-                social_points += 5
-
-
-# F
-
-
