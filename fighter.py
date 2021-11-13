@@ -18,15 +18,15 @@ class Player:
         dx: int = 0
         dy: int = 0
         if K_UP:
-            position.y += 1
+            self.position.y += 1
         elif K_DOWN:
-            position.y -= 1
+            self.position.y -= 1
         elif K_LEFT:
-            position.x += 1
+            self.position.x += 1
         elif K_RIGHT:
-            position.x -= 1
+            self.position.x -= 1
         
-        py.draw.circle(position, size)
+        py.draw.circle(self.position, self.size)
 
         def collision
 
