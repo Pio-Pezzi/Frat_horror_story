@@ -42,3 +42,5 @@ class poi:
         unit_vector: Vector = vector.normalize()
         speed_vector: Vector = unit_vector * self.speed
         self.position = self.position + speed_vector 
+
+    enemy_list
