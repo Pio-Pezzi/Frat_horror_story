@@ -27,10 +27,10 @@ level: int = 0
 
 # Clock information 
 c: int = 0 
-FRAMES = 60
+FRAMES = int(input("How fast are the frat bros? Range of 1-120. "))
 
 # Enemy Information 
-num_enemies: int = 4 
+num_enemies: int = int(input("How many frat bros are there? "))
 enemy_list: list[str] = []
 enemy_total: int = len(enemy_list)
 
@@ -55,7 +55,7 @@ gm: GameManager = GameManager()
 
 
 # UI Elements for GUI
-time = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 0), (200, 50)), text='Time Remaining: ' + str(1000 - c), manager=manager) 
+time = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 0), (200, 50)), text='Time Remaining: ' + str(750 - c), manager=manager) 
 social_points = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 100), (200, 50)), text='Social Points: ' + str(len(enemy_list)), manager=manager) 
 toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 200), (200, 50)), text='Toxicity: ', manager=manager) 
 person: Player = Player()
@@ -63,7 +63,7 @@ person: Player = Player()
 # Game Loop
 while playing:
     # Games internal clock, sets number of frames run per second
-    if c > 1000: 
+    if c > 750: 
         sys.exit()
     else: 
         c += 1 
@@ -109,25 +109,20 @@ while playing:
         enemy_list.append(frat_bro(blue))
         i += 1 
     for enemy in enemy_list: 
-        r: int = randint(1, 30)
+        r: int = randint(1, 3)
         if r == 1:
             x = choice(move_set)
             y = 0 
-            py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
-            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
-            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
         elif r == 2: 
             y = choice(move_set)
             x = 0 
-            py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
-            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
-            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
         elif r == 3: 
             x = choice(move_set)
             y = choice(move_set)
-            py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
-            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
-            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+             
+        py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
+        enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+        enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
 
        
 
@@ -159,7 +154,7 @@ while playing:
 
     # GUI Updates
     social_points.set_text("Social Points: " + str(points))
-    time.set_text('Time Remaining: ' + str(1000 - c))
+    time.set_text('Time Remaining: ' + str(750 - c))
     toxicity.set_text("Toxicity: " + str(level))
     manager.process_events(event)
     manager.update(20)
