@@ -18,6 +18,7 @@ blue = 12, 52, 154, 0
 white = 255, 255, 255, 255
 color = 100, 50, 20, 10
 fish_color = 30, 40, 100
+points: int = 4
 
 FRAMES = 60
 
@@ -39,10 +40,11 @@ py.display.set_caption('Frat Horror Story')
     # textRect.center = (640 // 2, 480 // 2)
 
 manager = pygame_gui.UIManager((width, height))
+gm: GameManager = GameManager()
 
 num_enemies: int = 4 
 
-enemy_list: list[str] = []
+enemy_list: list[frat_bro] = []
 enemy_total: int = len(enemy_list)
 
 # Clock integer 
@@ -93,11 +95,15 @@ while playing:
         enemy.move(Vector(enemy.position.x + randint(1, 5), enemy.position.y + randint(-5, -1)))
         enemy.move(Vector(enemy.position.x + randint(-5, -1), enemy.position.y + randint(1, 5)))
 
+    for key in enemy_list:
+        if gm.collision(Vector(person.position.x, person.position.y), Vector(key.position.x, key.position.y)):
+            points -= 1
 
     py.draw.circle(screen, green, (person.position.x, person.position.y), 20)
 
+
     # GUI Updates
-    social_points.set_text("Social Points: " + str(num_enemies))
+    social_points.set_text("Social Points: " + str(points))
     time.set_text('Time Remaining: ' + str(800 - c))
     toxicity.set_text("Social Points: " + str(num_enemies))
     manager.process_events(event)
