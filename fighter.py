@@ -37,3 +37,6 @@ class Player:
                 Social_score += 5
 
 
+# F
+
+
