@@ -48,6 +48,7 @@ enemy_total: int = len(enemy_list)
 time = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 0), (200, 50)), text='Time Remaining: ' + str(len(enemy_list)), manager=manager) 
 social_points = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 100), (200, 50)), text='Social Points: ' + str(len(enemy_list)), manager=manager) 
 toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 200), (200, 50)), text='Toxicity: ' + str(len(enemy_list)), manager=manager) 
+person: Player = Player()
 
 i = 0 
 # Game Loop
@@ -59,14 +60,16 @@ while playing:
     # Tracks player interaction
     for event in py.event.get():
         if event.type == py.QUIT: sys.exit()
-        if event.type == py.K_UP:
-            person.position.y += 20
-        elif event.type == py.K_DOWN:
-            person.position.y -= 20
-        elif event.type ==  py.K_LEFT:
-            person.position.x += 20
-        elif event.type ==  py.K_RIGHT:
-            person.position.x -= 20
+        if event.type == py.KEYDOWN:
+            if event.key == py.K_w:
+                print("prha")
+                person.position.y -= 10
+            if event.key == py.K_s:
+                person.position.y += 10
+            if event.key ==  py.K_a:
+                person.position.x -= 10
+            if event.key ==  py.K_d:
+                person.position.x += 10
         # Places fighter if game manager agrees
         #if event.type == py.MOUSEBUTTONUP:
             # pos = py.mouse.get_pos()
@@ -81,7 +84,6 @@ while playing:
         enemy.move(Vector(enemy.position.x + randint(1, 5), enemy.position.y + randint(-5, -1)))
         enemy.move(Vector(enemy.position.x + randint(-5, -1), enemy.position.y + randint(1, 5)))
 
-    person: Player = Player()
 
     py.draw.circle(screen, green, (person.position.x, person.position.y), 20)
 
