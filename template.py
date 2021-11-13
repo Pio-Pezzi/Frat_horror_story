@@ -12,14 +12,22 @@ py.init()
 # Window
 size = width, height = 840, 480
 
-# RGBA constants
+# Constants
 green = 12, 152, 54, 0
 blue = 12, 52, 154, 0
 white = 255, 255, 255, 255
 color = 100, 50, 20, 10
 fish_color = 30, 40, 100
+i = 0 
 
+# Clock information 
+c: int = 0 
 FRAMES = 60
+
+# Enemy Information 
+num_enemies: int = 4 
+enemy_list: list[str] = []
+enemy_total: int = len(enemy_list)
 
 # Makes Screen
 screen = py.display.set_mode(size)
@@ -33,31 +41,19 @@ playing = True
 # Handles GUI
 py.display.set_caption('Frat Horror Story')
 
-    # font = py.font.SysFont("", 32)
-    # text = font.render('Welcome to the game!', True, green, blue)
-    # textRect = text.get_rect()
-    # textRect.center = (640 // 2, 480 // 2)
-
 manager = pygame_gui.UIManager((width, height))
 
-num_enemies: int = 4 
 
-enemy_list: list[str] = []
-enemy_total: int = len(enemy_list)
-
-# Clock integer 
-c: int = 0 
 # UI Elements for GUI
-time = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 0), (200, 50)), text='Time Remaining: ' + str(1800 - c), manager=manager) 
+time = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 0), (200, 50)), text='Time Remaining: ' + str(1000 - c), manager=manager) 
 social_points = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 100), (200, 50)), text='Social Points: ' + str(len(enemy_list)), manager=manager) 
 toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 200), (200, 50)), text='Toxicity: ' + str(len(enemy_list)), manager=manager) 
 person: Player = Player()
 
-i = 0 
 # Game Loop
 while playing:
     # Games internal clock, sets number of frames run per second
-    if c > 800: 
+    if c > 1000: 
         sys.exit()
     else: 
         c += 1 
@@ -71,13 +67,13 @@ while playing:
         if event.type == py.KEYDOWN:
             if event.key == py.K_w:
                 print("prha")
-                person.position.y -= 10
+                person.position.y -= 30
             if event.key == py.K_s:
-                person.position.y += 10
+                person.position.y += 30
             if event.key ==  py.K_a:
-                person.position.x -= 10
+                person.position.x -= 30
             if event.key ==  py.K_d:
-                person.position.x += 10
+                person.position.x += 30
         # Places fighter if game manager agrees
         #if event.type == py.MOUSEBUTTONUP:
             # pos = py.mouse.get_pos()
@@ -92,13 +88,15 @@ while playing:
         py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
         enemy.move(Vector(enemy.position.x + randint(1, 5), enemy.position.y + randint(-5, -1)))
         enemy.move(Vector(enemy.position.x + randint(-5, -1), enemy.position.y + randint(1, 5)))
+    
+    # Adding 
 
 
     py.draw.circle(screen, green, (person.position.x, person.position.y), 20)
 
     # GUI Updates
     social_points.set_text("Social Points: " + str(num_enemies))
-    time.set_text('Time Remaining: ' + str(800 - c))
+    time.set_text('Time Remaining: ' + str(1000 - c))
     toxicity.set_text("Social Points: " + str(num_enemies))
     manager.process_events(event)
     manager.update(20)
