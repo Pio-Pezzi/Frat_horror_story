@@ -56,7 +56,7 @@ gm: GameManager = GameManager()
 # UI Elements for GUI
 time = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 0), (200, 50)), text='Time Remaining: ' + str(1000 - c), manager=manager) 
 social_points = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 100), (200, 50)), text='Social Points: ' + str(len(enemy_list)), manager=manager) 
-toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 200), (200, 50)), text='Toxicity: ' + str(len(enemy_list)), manager=manager) 
+toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 200), (200, 50)), text='Toxicity: ', manager=manager) 
 person: Player = Player()
 
 # Game Loop
@@ -105,14 +105,15 @@ while playing:
     for drink in drink_list: 
         py.draw.circle(screen, drink.color, (drink.position.x, drink.position.y), 10)
 
-    # Adding 
+    # Collision (Enemies)
     for key in enemy_list:
         if gm.collision(Vector(person.position.x, person.position.y), Vector(key.position.x, key.position.y)):
             points -= 1
 
     py.draw.circle(screen, green, (person.position.x, person.position.y), 20)
 
-
+    if level > 10: 
+        points -= 100 
     # GUI Updates
     social_points.set_text("Social Points: " + str(points))
     time.set_text('Time Remaining: ' + str(1000 - c))
