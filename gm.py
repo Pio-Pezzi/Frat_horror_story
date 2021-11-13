@@ -1,6 +1,6 @@
 from enemy import frat_bro
 from projectile import Projectile
-from fighter import Fighter
+from fighter import Player
 from vector import Vector
 class GameManager:
     """Tracks all entities on screen, handles character stats and values, increases difficulty, and tracks collisions."""

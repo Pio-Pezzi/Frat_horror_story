@@ -63,6 +63,7 @@ while playing:
 
     while i < num_enemies: 
         enemy_list.append(frat_bro(blue))
+        i += 1 
     for enemy in enemy_list: 
         py.draw.circle(screen, frat_bro.color, (frat_bro.position.x, frat_bro.position.y), 20)
         frat_bro.move(Vector(pos[0] + 1, pos[1] + 2))

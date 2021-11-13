@@ -17,18 +17,18 @@ class Player:
     def position_change(self) -> None:
         dx: int = 0
         dy: int = 0
-        if K_UP:
+        if py.K_UP:
             self.position.y += 1
-        elif K_DOWN:
+        elif py.K_DOWN:
             self.position.y -= 1
-        elif K_LEFT:
+        elif py.K_LEFT:
             self.position.x += 1
-        elif K_RIGHT:
+        elif py.K_RIGHT:
             self.position.x -= 1
         
         py.draw.circle(self.position, self.size)
 
-        def collision
+        # def collision
 
     def visual(self):
         py.draw.cicle(screen, fish_color, (fish.position.x, fish.position.y), 20)
