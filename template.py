@@ -17,8 +17,9 @@ green = 12, 152, 54, 0
 blue = 12, 52, 154, 0
 white = 255, 255, 255, 255
 color = 100, 50, 20, 10
+tan = 210, 180, 140
 fish_color = 30, 40, 100
-points: int = 4
+points: int = len
 
 FRAMES = 60
 
@@ -84,7 +85,7 @@ while playing:
         #if event.type == py.MOUSEBUTTONUP:
             # pos = py.mouse.get_pos()
 
-    screen.fill(white)
+    screen.fill(tan)
 
     # Adding Frat Bros and making them move
     while i < num_enemies: 
