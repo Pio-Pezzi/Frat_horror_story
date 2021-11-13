@@ -2,7 +2,7 @@ import sys
 import pygame as py
 from vector import Vector
 from gm import GameManager
-from enemy import Fish
+from enemy import frat_bro
 import pygame_gui
 py.init()
 
@@ -39,12 +39,15 @@ manager = pygame_gui.UIManager((width, height))
 
 fish_position: list = [50, 200]
 
-gloria: Fish = Fish(Vector(fish_position[0], fish_position[1]), fish_color, 8.0) 
+num_enemies: int = 4 
 
-fish_list: list[Fish] = []
+enemy_list: list[str] = []
 # UI Elements for GUI
-fish_total = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 40), (200, 50)), text='Fish: ' + str(len(fish_list)), manager=manager) 
+time = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 40), (200, 50)), text='Fish: ' + str(len(enemy_list)), manager=manager) 
+social_points = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 50), (200, 60)), text='Fish: ' + str(len(enemy_list)), manager=manager) 
+toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 60), (200, 70)), text='Fish: ' + str(len(enemy_list)), manager=manager) 
 
+i = 0 
 # Game Loop
 while playing:
     # Games internal clock, sets number of frames run per second
@@ -59,6 +62,9 @@ while playing:
             fish_list.append(Fish(Vector(pos[0], pos[1]), fish_color, 5.0))
 
     screen.fill(white)
+
+    while i < num_enemies: 
+        enemy_list.append(frat_bro(blue))
     # for fish in fish_list: 
         # py.draw.circle(screen, fish_color, (fish.position.x, fish.position.y), 20)
         # fish.move_fish(Vector(pos[0] + 1, pos[1] + 2))

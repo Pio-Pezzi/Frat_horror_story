@@ -1,4 +1,4 @@
-from enemy import Fish
+from enemy import frat_bro
 from projectile import Projectile
 from fighter import Fighter
 from vector import Vector
