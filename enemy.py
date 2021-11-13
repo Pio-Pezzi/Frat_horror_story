@@ -29,8 +29,15 @@ class frat_bro:
 
 class poi: 
     """Person of Interest."""
-    position: Vector 
+    position: Vector
     color: tuple 
-    def __init__(self, position: Vector, color: tuple):
-        self.position = position
+
+    def __init__(self, color: tuple):
+        self.position = self.randpos()
         self.color = color 
+
+    def randpos(self) -> Vector: 
+        x: float = randint(20, 620) 
+        y: float = randint(20, 460)
+        result: Vector = Vector(x, y) 
+        return result 

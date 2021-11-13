@@ -2,7 +2,7 @@ import sys
 import pygame as py
 from vector import Vector
 from gm import GameManager
-from enemy import frat_bro
+from enemy import frat_bro, poi
 import pygame_gui
 from random import randint
 from fighter import Player
@@ -17,8 +17,11 @@ green = 12, 152, 54, 0
 blue = 12, 52, 154, 0
 white = 255, 255, 255, 255
 color = 100, 50, 20, 10
+brown = 139, 69, 19, 0
 fish_color = 30, 40, 100
 i = 0 
+d = 0 
+points: int = 4
 
 # Clock information 
 c: int = 0 
@@ -28,6 +31,10 @@ FRAMES = 60
 num_enemies: int = 4 
 enemy_list: list[str] = []
 enemy_total: int = len(enemy_list)
+
+# Alcohol Information 
+num_drinks: int = 5 
+drink_list: list[str] = []
 
 # Makes Screen
 screen = py.display.set_mode(size)
@@ -42,6 +49,7 @@ playing = True
 py.display.set_caption('Frat Horror Story')
 
 manager = pygame_gui.UIManager((width, height))
+gm: GameManager = GameManager()
 
 
 # UI Elements for GUI
@@ -89,15 +97,25 @@ while playing:
         enemy.move(Vector(enemy.position.x + randint(1, 5), enemy.position.y + randint(-5, -1)))
         enemy.move(Vector(enemy.position.x + randint(-5, -1), enemy.position.y + randint(1, 5)))
     
-    # Adding 
+    # Adding Drinks 
+    while d < num_drinks: 
+        drink_list.append(poi(brown))
+        d += 1 
+    for drink in drink_list: 
+        py.draw.circle(screen, drink.color, (drink.position.x, drink.position.y), 10)
 
+    # Adding 
+    for key in enemy_list:
+        if gm.collision(Vector(person.position.x, person.position.y), Vector(key.position.x, key.position.y)):
+            points -= 1
 
     py.draw.circle(screen, green, (person.position.x, person.position.y), 20)
 
+
     # GUI Updates
-    social_points.set_text("Social Points: " + str(num_enemies))
+    social_points.set_text("Social Points: " + str(points))
     time.set_text('Time Remaining: ' + str(1000 - c))
-    toxicity.set_text("Social Points: " + str(num_enemies))
+    toxicity.set_text("Toxicity: " + str(num_enemies))
     manager.process_events(event)
     manager.update(20)
     manager.draw_ui(screen)
