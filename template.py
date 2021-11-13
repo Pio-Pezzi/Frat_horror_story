@@ -71,10 +71,10 @@ while playing:
     pos = py.mouse.get_pos()
 
     # AI Movement - Frat Bros 
-    r: int = randint(1, 3)
     y: int 
     x: int 
-    move_set: list[int] = [-10, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 10]
+    move_set: list[int] = [-8, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 8]
+    r: int = randint(1, 3)
     if r == 1:
         x = choice(move_set)
         y = 0 
@@ -109,9 +109,28 @@ while playing:
         enemy_list.append(frat_bro(blue))
         i += 1 
     for enemy in enemy_list: 
-        py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
-        enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
-        enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+        r: int = randint(1, 30)
+        if r == 1:
+            x = choice(move_set)
+            y = 0 
+            py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
+            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+        elif r == 2: 
+            y = choice(move_set)
+            x = 0 
+            py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
+            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+        elif r == 3: 
+            x = choice(move_set)
+            y = choice(move_set)
+            py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
+            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+            enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+
+       
+
     
     # Adding Drinks 
     while d < num_drinks: 
