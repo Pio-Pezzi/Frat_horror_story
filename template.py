@@ -37,15 +37,14 @@ py.display.set_caption('Frat Horror Story')
 
 manager = pygame_gui.UIManager((width, height))
 
-fish_position: list = [50, 200]
-
 num_enemies: int = 4 
 
 enemy_list: list[str] = []
+enemy_total: int = len(enemy_list)
 # UI Elements for GUI
-time = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 40), (200, 50)), text='Fish: ' + str(len(enemy_list)), manager=manager) 
-social_points = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 50), (200, 60)), text='Fish: ' + str(len(enemy_list)), manager=manager) 
-toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 60), (200, 70)), text='Fish: ' + str(len(enemy_list)), manager=manager) 
+time = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 40), (200, 50)), text='Time Remaining: ' + str(len(enemy_list)), manager=manager) 
+social_points = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 50), (200, 60)), text='Social Points: ' + str(len(enemy_list)), manager=manager) 
+toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((420, 60), (200, 70)), text='Toxicity: ' + str(len(enemy_list)), manager=manager) 
 
 i = 0 
 # Game Loop
@@ -59,22 +58,18 @@ while playing:
         # Places fighter if game manager agrees
         if event.type == py.MOUSEBUTTONUP:
             pos = py.mouse.get_pos()
-            fish_list.append(Fish(Vector(pos[0], pos[1]), fish_color, 5.0))
 
     screen.fill(white)
 
     while i < num_enemies: 
         enemy_list.append(frat_bro(blue))
-    # for fish in fish_list: 
-        # py.draw.circle(screen, fish_color, (fish.position.x, fish.position.y), 20)
-        # fish.move_fish(Vector(pos[0] + 1, pos[1] + 2))
+    for enemy in enemy_list: 
+        py.draw.circle(screen, frat_bro.color, (frat_bro.position.x, frat_bro.position.y), 20)
+        frat_bro.move(Vector(pos[0] + 1, pos[1] + 2))
 
-    # py.draw.rect(screen, blue, (200, 150, 100, 50))
-
-    # py.draw.polygon(screen, fish_color, [(fish_position), (fish.position.x + 30, fish.position.y + 20), (fish.position.x + 30, fish.position.y - 20)])
 
     # GUI Updates
-    fish_total.set_text("Social Points: " + str(len(fish_list)))
+    enemy_total.set_text("Social Points: " + num_enemies)
     manager.process_events(event)
     manager.update(20)
     manager.draw_ui(screen)

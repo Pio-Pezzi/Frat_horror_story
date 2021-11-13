@@ -8,9 +8,8 @@ class frat_bro:
     position: Vector
     color: tuple 
     speed: float = 5.0 
-    size: float = 3.0 
 
-    # Giving all NPC's Position, color, and speed. 
+    # Giving all frat bros Position, color, and speed. 
     def __init__(self, color: tuple):
         self.position = self.randpos()
         self.color = color 
@@ -29,16 +28,9 @@ class frat_bro:
         return result 
 
 class poi: 
+    """Person of Interest."""
     position: Vector 
     color: tuple 
-    """Person of Interest."""
-    def __init__(self, color: tuple):
-        self.position = self.randpos()
+    def __init__(self, position: Vector, color: tuple):
+        self.position = position
         self.color = color 
-
-    # Moving characters 
-    def move(self, new_position: Vector) -> None: 
-        vector: Vector = new_position - self.position 
-        unit_vector: Vector = vector.normalize()
-        speed_vector: Vector = unit_vector * self.speed
-        self.position = self.position + speed_vector 
