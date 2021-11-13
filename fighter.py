@@ -25,10 +25,18 @@ class Player:
             self.position.x += 1
         elif py.K_RIGHT:
             self.position.x -= 1
-        
         py.draw.circle(self.position, self.size)
 
-        # def collision
+    def collision(self, vector) -> None:
+        for key in enemy_list:
+            if (self.position.x + 2 * self.size < enemy_list[key].position.x < self.position.x - 2 * self.size) and (self.position.y + 2 * self.size < enemy_list[key].position.y < self.position.y - 2 * self.size):
+                Social_score -= 5
 
-    def visual(self):
-        py.draw.cicle(screen, fish_color, (fish.position.x, fish.position.y), 20)
+        for key in poi_list:
+            if (self.position.x + 2 * self.size < poi_list[key].position.x < self.position.x - 2 * self.size) and (self.position.y + 2 * self.size < poi_list[key].position.y < self.position.y - 2 * self.size):
+                Social_score += 5
+
+
+# F
+
+
