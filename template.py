@@ -23,6 +23,7 @@ fish_color = 30, 40, 100
 i = 0 
 d = 0 
 points: int = 4
+level: int = 0
 
 # Clock information 
 c: int = 0 
@@ -103,7 +104,8 @@ while playing:
         drink_list.append(poi(brown))
         d += 1 
     for drink in drink_list: 
-        py.draw.circle(screen, drink.color, (drink.position.x, drink.position.y), 10)
+        if drink.show:
+            py.draw.circle(screen, drink.color, (drink.position.x, drink.position.y), 10)
 
     # Collision (Enemies)
     for key in enemy_list:
@@ -112,12 +114,20 @@ while playing:
 
     py.draw.circle(screen, green, (person.position.x, person.position.y), 20)
 
+    for key in drink_list:
+        if gm.collision(Vector(person.position.x, person.position.y), Vector(key.position.x, key.position.y)) and key.show:
+            points += 10
+            level += 3
+            key.show = False
+
     if level > 10: 
         points -= 100 
+
+
     # GUI Updates
     social_points.set_text("Social Points: " + str(points))
     time.set_text('Time Remaining: ' + str(1000 - c))
-    toxicity.set_text("Toxicity: " + str(num_enemies))
+    toxicity.set_text("Toxicity: " + str(level))
     manager.process_events(event)
     manager.update(20)
     manager.draw_ui(screen)
