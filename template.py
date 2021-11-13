@@ -5,6 +5,7 @@ from gm import GameManager
 from enemy import frat_bro
 import pygame_gui
 from random import randint
+from fighter import Player
 
 py.init()
 
@@ -58,6 +59,14 @@ while playing:
     # Tracks player interaction
     for event in py.event.get():
         if event.type == py.QUIT: sys.exit()
+        if event.type == py.K_UP:
+            person.position.y += 20
+        elif event.type == py.K_DOWN:
+            person.position.y -= 20
+        elif event.type ==  py.K_LEFT:
+            person.position.x += 20
+        elif event.type ==  py.K_RIGHT:
+            person.position.x -= 20
         # Places fighter if game manager agrees
         #if event.type == py.MOUSEBUTTONUP:
             # pos = py.mouse.get_pos()
@@ -71,6 +80,10 @@ while playing:
         py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
         enemy.move(Vector(enemy.position.x + randint(1, 5), enemy.position.y + randint(-5, -1)))
         enemy.move(Vector(enemy.position.x + randint(-5, -1), enemy.position.y + randint(1, 5)))
+
+    person: Player = Player()
+
+    py.draw.circle(screen, green, (person.position.x, person.position.y), 20)
 
     # GUI Updates
     social_points.set_text("Social Points: " + str(num_enemies))

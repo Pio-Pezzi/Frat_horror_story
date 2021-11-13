@@ -2,9 +2,8 @@ class Player:
     from random import randint
    position: Vector
     size: float = 1.0
-    social_points: int
     toxicity: int = 0
-    size: float 
+    size: float: 1
 
     def __init__(self, position): 
         size = self.size
