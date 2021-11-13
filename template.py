@@ -44,8 +44,11 @@ num_enemies: int = 4
 
 enemy_list: list[str] = []
 enemy_total: int = len(enemy_list)
+
+# Clock integer 
+c: int = 0 
 # UI Elements for GUI
-time = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 0), (200, 50)), text='Time Remaining: ' + str(len(enemy_list)), manager=manager) 
+time = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 0), (200, 50)), text='Time Remaining: ' + str(1800 - c), manager=manager) 
 social_points = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 100), (200, 50)), text='Social Points: ' + str(len(enemy_list)), manager=manager) 
 toxicity = pygame_gui.elements.UILabel(relative_rect=py.Rect((640, 200), (200, 50)), text='Toxicity: ' + str(len(enemy_list)), manager=manager) 
 person: Player = Player()
@@ -54,8 +57,13 @@ i = 0
 # Game Loop
 while playing:
     # Games internal clock, sets number of frames run per second
+    if c > 800: 
+        sys.exit()
+    else: 
+        c += 1 
     clock.tick(FRAMES)
     pos = py.mouse.get_pos()
+
 
     # Tracks player interaction
     for event in py.event.get():
@@ -76,6 +84,7 @@ while playing:
 
     screen.fill(white)
 
+    # Adding Frat Bros and making them move
     while i < num_enemies: 
         enemy_list.append(frat_bro(blue))
         i += 1 
@@ -89,6 +98,8 @@ while playing:
 
     # GUI Updates
     social_points.set_text("Social Points: " + str(num_enemies))
+    time.set_text('Time Remaining: ' + str(800 - c))
+    toxicity.set_text("Social Points: " + str(num_enemies))
     manager.process_events(event)
     manager.update(20)
     manager.draw_ui(screen)
