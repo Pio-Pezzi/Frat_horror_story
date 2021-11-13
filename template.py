@@ -4,7 +4,7 @@ from vector import Vector
 from gm import GameManager
 from enemy import frat_bro, poi
 import pygame_gui
-from random import randint
+from random import randint, choice 
 from fighter import Player
 
 py.init()
@@ -70,7 +70,21 @@ while playing:
     clock.tick(FRAMES)
     pos = py.mouse.get_pos()
 
-
+    # AI Movement - Frat Bros 
+    r: int = randint(1, 3)
+    y: int 
+    x: int 
+    move_set: list[int] = [-10, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 10]
+    if r == 1:
+        x = choice(move_set)
+        y = 0 
+    elif r == 2: 
+        y = choice(move_set)
+        x = 0 
+    elif r == 3: 
+        x = choice(move_set)
+        y = choice(move_set)
+        
     # Tracks player interaction
     for event in py.event.get():
         if event.type == py.QUIT: sys.exit()
@@ -96,8 +110,8 @@ while playing:
         i += 1 
     for enemy in enemy_list: 
         py.draw.circle(screen, enemy.color, (enemy.position.x, enemy.position.y), 20)
-        enemy.move(Vector(enemy.position.x + randint(1, 5), enemy.position.y + randint(-5, -1)))
-        enemy.move(Vector(enemy.position.x + randint(-5, -1), enemy.position.y + randint(1, 5)))
+        enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
+        enemy.move(Vector(enemy.position.x + x, enemy.position.y + y))
     
     # Adding Drinks 
     while d < num_drinks: 
